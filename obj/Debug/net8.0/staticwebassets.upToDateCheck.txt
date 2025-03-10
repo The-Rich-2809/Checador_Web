@@ -1,5 +1,15 @@
 wwwroot\css\site.css
 wwwroot\favicon.ico
+wwwroot\HTML\css\Checar.css
+wwwroot\HTML\Html\Checar.html
+wwwroot\HTML\Html\Empleados.html
+wwwroot\HTML\Html\Huella.html
+wwwroot\HTML\Html\Index.html
+wwwroot\HTML\Html\Login.html
+wwwroot\HTML\Js\index.js
+wwwroot\HTML\Js\mysql.js
+wwwroot\HTML\package.json
+wwwroot\HTML\package-lock.json
 wwwroot\js\site.js
 wwwroot\lib\bootstrap\dist\css\bootstrap.css
 wwwroot\lib\bootstrap\dist\css\bootstrap.css.map

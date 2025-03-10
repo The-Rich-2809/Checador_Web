@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Checador.Models.Tablas
+@{
     Layout = "_LayoutAdmin";
 }
 <!DOCTYPE html>
@@ -6,14 +7,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla de Usuarios con Filtros</title>
+    <title>Empleados</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
-    <iframe frameborder="0" class="navbar" src="navbar.html"></iframe>
-
     <div class="container">
         <h1 class="text-center mb-4">Tabla de Empleados</h1>
 
@@ -30,43 +29,34 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Email</th>
+                    <th>Tipo de Empleado</th>
+                    <th>Site</th>
                     <th>Estado</th>
-                    <th><a class="btn btn-success btn-sm" asp-controller="Admin" asp-action="editEmpleados">Agregar</a></th>
+                    <th><a class="btn btn-success btn-sm" asp-controller="Admin" asp-action="addEmpleados">Agregar</a></th>
                 </tr>
             </thead>
             <tbody id="usersTableBody">
                 <!-- Datos de usuarios -->
-                <tr data-status="active">
-                    <td>1</td>
-                    <td>Juan Pérez</td>
-                    <td>juan@example.com</td>
-                    <td><span class="badge bg-success">Activo</span></td>
-                    <td>
-                        <button class="btn btn-warning btn-sm" onclick="editUser(1)">Modificar</button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteUser(1)">Eliminar</button>
-                    </td>
-                </tr>
-                <tr data-status="inactive">
-                    <td>2</td>
-                    <td>María García</td>
-                    <td>maria@example.com</td>
-                    <td><span class="badge bg-secondary">Inactivo</span></td>
-                    <td>
-                        <button class="btn btn-warning btn-sm" onclick="editUser(2)">Modificar</button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteUser(2)">Eliminar</button>
-                    </td>
-                </tr>
-                <tr data-status="active">
-                    <td>3</td>
-                    <td>Carlos López</td>
-                    <td>carlos@example.com</td>
-                    <td><span class="badge bg-success">Activo</span></td>
-                    <td>
-                        <button class="btn btn-warning btn-sm" onclick="editUser(3)">Modificar</button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteUser(3)">Eliminar</button>
-                    </td>
-                </tr>
+                @foreach (var empleado in Model.Empleados)
+                {
+                    <tr data-status="active">
+                        <td>@empleado.Id</td>
+                        <td>@empleado.Nombre</td>
+                        <td>@empleado.TipoEmpleado</td>
+                        @foreach (var site in Model.Sites)
+                        {
+                            if (site.Id == empleado.IdSite)
+                            {
+                                <td>@site.Nombre</td>
+                            }
+                        }
+                        <td><span class="badge bg-success">Activo</span></td>
+                        <td>
+                            <a class="btn btn-warning btn-sm" href="@Url.Action("editEmpleados", "Admin", new { Id = empleado.Id })">Modificar</a>
+                            <a class="btn btn-danger btn-sm" href="@Url.Action("deleteEmpleados", "Admin", new { Id = empleado.Id })">Eliminar</a>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

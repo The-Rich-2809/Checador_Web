@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Huella Digital</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="card mx-auto" style="max-width: 600px;">
+            <div class="card-body text-center">
+                <h2 class="card-title mb-4">Registro de Huella Digital</h2>
+                <p class="card-text">Coloca tu dedo en el lector de huellas para registrar tu huella digital.</p>
+
+                <!-- Simulación de registro de huella digital -->
+                <div class="my-4">
+                    <button id="startScan" class="btn btn-primary">Iniciar Escaneo de Huella</button>
+                </div>
+
+                <div id="scanStatus" class="alert d-none" role="alert"></div>
+
+                <div class="text-center mt-4">
+                    <button class="btn btn-secondary" onclick="goBack()">Volver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById('startScan').addEventListener('click', function () {
+            const scanStatus = document.getElementById('scanStatus');
+
+            scanStatus.classList.remove('d-none', 'alert-danger', 'alert-success');
+            scanStatus.classList.add('alert-info');
+            scanStatus.textContent = 'Escaneando... Por favor, mantén tu dedo en el lector.';
+
+            // Simulación del escaneo de huella digital
+            setTimeout(() => {
+                const isSuccess = Math.random() > 0.2; // Simulación con probabilidad de éxito del 80%
+
+                scanStatus.classList.remove('alert-info');
+                scanStatus.classList.add(isSuccess ? 'alert-success' : 'alert-danger');
+                scanStatus.textContent = isSuccess 
+                    ? 'Huella digital registrada con éxito.' 
+                    : 'Error al registrar la huella digital. Intenta de nuevo.';
+            }, 3000);
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

@@ -18,7 +18,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" asp-controller="Admin" asp-action="Lobby">Inicio</a>
+                        <a class="nav-link active" asp-controller="Admin" asp-action="Index">Inicio</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" asp-controller="Admin" asp-action="Empleados">Empleados</a>
@@ -27,15 +27,13 @@
                         <a class="nav-link active" asp-controller="Admin" asp-action="Sites">Sites</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" asp-controller="Admin" asp-action="Asistencias">Asistencias</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Admin" asp-action="CerrarSesion">Cerrar Sesión</a>
+                        <a class="nav-link" href="#">Cerrar Sesión</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <br />
     <main>
         @RenderBody()
     </main>

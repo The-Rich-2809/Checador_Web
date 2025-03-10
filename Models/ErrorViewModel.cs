@@ -1,4 +1,4 @@
-namespace Admin_Checador_Web.Models
+namespace Checador.Models
 {
     public class ErrorViewModel
     {
