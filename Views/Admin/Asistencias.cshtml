@@ -13,8 +13,10 @@
 <body>
     <div class="container mt-5">
         <h2 class="mb-4">Asistencias de Empleados</h2>
+
+        <!-- Filtros -->
         <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <label for="filterSite" class="form-label">Filtrar por Site:</label>
                 <select id="filterSite" class="form-select">
                     <option value="">Todos</option>
@@ -22,13 +24,23 @@
                     <option value="Guadalajara">Guadalajara</option>
                 </select>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <label for="filterEncargado" class="form-label">Filtrar por Encargado:</label>
                 <select id="filterEncargado" class="form-select">
                     <option value="">Todos</option>
                 </select>
             </div>
+            <div class="col-md-3">
+                <label for="startDate" class="form-label">Fecha Inicio:</label>
+                <input type="date" id="startDate" class="form-control">
+            </div>
+            <div class="col-md-3">
+                <label for="endDate" class="form-label">Fecha Fin:</label>
+                <input type="date" id="endDate" class="form-control">
+            </div>
         </div>
+
+        <!-- Tabla -->
         <table id="tablaAsistencias" class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -69,13 +81,14 @@
             </tbody>
         </table>
     </div>
+
     @section scripts {
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap5.min.js"></script>
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 var table = $('#tablaAsistencias').DataTable({
                     "language": {
                         "url": "//cdn.datatables.net/plug-ins/1.11.5/i18n/Spanish.json"
@@ -88,13 +101,14 @@
                     "Guadalajara": ["Laura Gómez"]
                 };
 
-                $('#filterSite').on('change', function() {
+                // Filtrar por Site
+                $('#filterSite').on('change', function () {
                     var site = $(this).val();
                     var encargadoSelect = $('#filterEncargado');
                     encargadoSelect.empty().append('<option value="">Todos</option>');
 
                     if (site && encargadosPorSite[site]) {
-                        encargadosPorSite[site].forEach(function(encargado) {
+                        encargadosPorSite[site].forEach(function (encargado) {
                             encargadoSelect.append('<option value="' + encargado + '">' + encargado + '</option>');
                         });
                     }
@@ -102,10 +116,35 @@
                     table.columns(2).search(site).draw();
                 });
 
-                $('#filterEncargado').on('change', function() {
+                // Filtrar por Encargado
+                $('#filterEncargado').on('change', function () {
                     var encargado = $(this).val();
                     table.columns(4).search(encargado).draw();
                 });
+
+                // Filtrar por rango de fechas
+                $('#startDate, #endDate').on('change', function () {
+                    var startDate = $('#startDate').val();
+                    var endDate = $('#endDate').val();
+
+                    table.draw();
+                });
+
+                // Extender DataTables para filtrar por rango de fechas
+                $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                    var min = $('#startDate').val();
+                    var max = $('#endDate').val();
+                    var date = data[5]; // Columna de la fecha
+
+                    if (min && date < min) {
+                        return false;
+                    }
+                    if (max && date > max) {
+                        return false;
+                    }
+                    return true;
+                });
+
             });
         </script>
     }

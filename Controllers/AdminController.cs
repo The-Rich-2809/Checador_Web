@@ -1,6 +1,7 @@
 ﻿using Checador_Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Checador_Web.Controllers
 {
@@ -12,7 +13,7 @@ namespace Checador_Web.Controllers
             DataTable data = admin.Mostrar_Empleados();
             foreach (DataRow row in data.Rows)
             {
-                if(Datos.IdEncargado == row.Field<int>("IdEncargado"))
+                if (Datos.IdEncargado == row.Field<int>("IdEncargado"))
                 {
                     ViewBag.Nombre = row.Field<string>("Nombre");
                     break;
@@ -21,7 +22,7 @@ namespace Checador_Web.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Empleados() 
+        public IActionResult Empleados()
         {
             DataTable data = admin.Mostrar_Empleados();
             DataTable sites = admin.Mostrar_Sites();
@@ -32,6 +33,61 @@ namespace Checador_Web.Controllers
         [HttpGet]
         public IActionResult Agregar_Empleados()
         {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Sites()
+        {
+            DataTable data = admin.Mostrar_Sites();
+            ViewBag.Sites = data;  
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CrearSite()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CrearSite(string Nombre, string Direccion, string Correo, string Contrasena)
+        {
+            if (admin.CrearSite(Nombre, Direccion, Correo, Contrasena))
+                return RedirectToAction("Sites");
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult EditarSite(int id)
+        {
+            DataTable dt = admin.GetSite(id);
+            ViewBag.Sites = dt;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EditarSite(int IdSite, string Nombre, string Direccion, string Correo)
+        {
+            if (admin.EditSite(IdSite, Nombre, Direccion, Correo))
+                return RedirectToAction("Sites");
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult EliminarSite(int id)
+        {
+            DataTable dt = admin.GetSite(id);
+            ViewBag.Sites = dt;
+            Datos.IdSite = id;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult EliminarSite()
+        {
+            if (admin.EliminarSite(Datos.IdSite))
+                return RedirectToAction("Sites");
             return View();
         }
 
