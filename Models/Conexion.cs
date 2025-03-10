@@ -12,7 +12,7 @@ namespace Admin_Checador_Web.Models
         public static MySqlConnection conexion()
         {
             string cadenaConexion = "";
-            cadenaConexion = "datasource=localhost; username=root; password=300920; database=checador";
+            cadenaConexion = "datasource=localhost; username=checador; password=300920; database=checador";
             //cadenaConexion = "datasource=db4free.net; username=dbintervalo; password=Intervalo2024; database=dbchecador";
 
             try

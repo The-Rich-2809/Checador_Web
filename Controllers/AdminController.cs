@@ -23,18 +23,8 @@ namespace Admin_Checador_Web.Controllers
         [HttpGet]
         public IActionResult Empleados() 
         {
-            DataTable data = admin.Mostrar_Empleados();
-            DataTable sites = admin.Mostrar_Sites();
-            ViewBag.Empleados = data;
-            ViewBag.Sites = sites;
             return View();
         }
-        [HttpGet]
-        public IActionResult Agregar_Empleados()
-        {
-            return View();
-        }
-
         [HttpGet]
         public IActionResult Asistencias()
         {
