@@ -1,105 +1,54 @@
-using Checador.Models;
+﻿using Checador_Web.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Diagnostics;
 
-namespace Checador.Controllers
+namespace Checador_Web.Controllers
 {
     public class HomeController : Controller
     {
+        Login_SQL login = new Login_SQL();
         private readonly ILogger<HomeController> _logger;
-        private readonly ChecadorDB _contextDB;
 
-        public HomeController(ILogger<HomeController> logger, ChecadorDB contexDB)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _contextDB = contexDB;
-        }
-
-        public IActionResult Index()
-        {
-            Initialize();
-            //var MiCookie = HttpContext.Request.Cookies["MiCookie"];
-
-            //if (MiCookie != null) 
-            //{
-            //    List<Usuario> usuarios = _contextDB.Usuario.ToList();
-            //    foreach (var item in usuarios)
-            //    {
-            //        if (MiCookie == item.Correo)
-            //        {
-            //            ViewBag.Nombre = item.Nombre;
-            //            ViewBag.Tipo = item.TipoUsuario;
-            //        }
-            //    }
-            //}
-            return View();
         }
 
         [HttpGet]
-        public IActionResult Login(){
-            Initialize();
-            return View();
-        }
-
-        //[HttpPost]
-        //public IActionResult Login(Usuario usuario){
-        //    UsuarioModel usuarioModel = new UsuarioModel(_contextDB);
-        //    usuarioModel.Correo = usuario.Correo;
-        //    usuarioModel.Contrasena = usuario.Contrasena;
-
-        //    if (usuarioModel.Login())
-        //    {
-        //        CookieOptions options = new CookieOptions();
-        //        options.Expires = DateTime.Now.AddDays(365);
-        //        options.IsEssential = true;
-        //        options.Path = "/";
-        //        HttpContext.Response.Cookies.Append("MiCookie", usuario.Correo, options);
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(usuario);
-        //}
-
-        public IActionResult Privacy()
+        public IActionResult Index()
         {
-            return View();
-        }
+            var miCookie = HttpContext.Request.Cookies["Checador_Intervalo"];
 
-        public void Initialize()
-        {
-            _contextDB.Database.EnsureCreated();
-
-            if (_contextDB.Usuario.Any())
+            DataTable data = login.Mostrar_EmpleadosAdmin();
+            foreach (DataRow row in data.Rows)
             {
-                return;
+                if (miCookie == row.Field<string>("Correo"))
+                {
+                    return RedirectToAction("Lobby", "Admin");
+                }
             }
 
-            var insertarEmpleado = new Empleado[]
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Index(string Correo, string Contrasena)
+        {
+            if (login.Ingresar(Correo, Contrasena))
             {
-                new Empleado {Nombre = "Rich", TipoEmpleado = "Administrador", Activo = true, IdSite = 1, Hash = "1554SA5S", DireccionImagen = "h", Sexo = "Masculino"}
-            };
+                CookieOptions options = new CookieOptions();
+                options.Expires = DateTime.Now.AddDays(365);
+                options.IsEssential = true;
+                options.Path = "/";
+                HttpContext.Response.Cookies.Append("Checador_Intervalo", Correo, options);
 
-            var insertarUsuario = new Usuario[]
+                return RedirectToAction("Lobby", "Admin");
+            }
+            else
             {
-                new Usuario {Contrasena = "1234", Correo = "ricardo_138@outlook.com",  HashEmpleado = "1554SA5S"}
-            };
-
-            var insertarSite = new Site[]
-            {
-                new Site {Nombre = "Valle de chalco", Direccion = "Calle Poniente 4D",Activo = true}
-            };
-
-            foreach (var u in insertarUsuario)
-                _contextDB.Usuario.Add(u);
-            _contextDB.SaveChanges();
-
-            foreach (var u in insertarSite)
-                _contextDB.Sites.Add(u);
-            _contextDB.SaveChanges();
-
-            foreach (var u in insertarEmpleado)
-                _contextDB.Empleados.Add(u);
-            _contextDB.SaveChanges();
+                ViewBag.ErrorMessage = "Usuario y/o Contraseña incorrecta";
+                return View();
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

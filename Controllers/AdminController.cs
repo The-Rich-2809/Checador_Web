@@ -1,118 +1,84 @@
-﻿using Checador.Models;
+﻿using Checador_Web.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Security.Cryptography;
-using System.Text;
+using System.Data;
 
-namespace Checador.Controllers
+namespace Checador_Web.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly ChecadorDB _contextDB;
-        static int idEmpleado = 0;
-
-        public AdminController(ChecadorDB contexDB)
+        Admin_SQL admin = new Admin_SQL();
+        public IActionResult Lobby()
         {
-            _contextDB = contexDB;
+            DataTable data = admin.Mostrar_Empleados();
+            foreach (DataRow row in data.Rows)
+            {
+                if(Datos.IdEncargado == row.Field<int>("IdEncargado"))
+                {
+                    ViewBag.Nombre = row.Field<string>("Nombre");
+                    break;
+                }
+            }
+            return View();
         }
-
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Empleados() 
+        {
+            DataTable data = admin.Mostrar_Empleados();
+            DataTable sites = admin.Mostrar_Sites();
+            ViewBag.Empleados = data;
+            ViewBag.Sites = sites;
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Agregar_Empleados()
         {
             return View();
         }
 
-        public IActionResult Empleados()
+        [HttpGet]
+        public IActionResult Asistencias()
         {
-            var listaEmpleados = _contextDB.Empleados.ToList();
-            var listaSites = _contextDB.Sites.ToList();
-            var viewModel = new Tablas
+            return View();
+        }
+        [HttpGet]
+        public JsonResult ObtenerAsistencias()
+        {
+            DateTime dateTime = new DateTime();
+            int FechaEmpleado = 0;
+            DataTable dt_asitencias = admin.Mostrar_Asistencias();
+            dt_asitencias.DefaultView.Sort = "registro ASC";
+
+            DataTable dt_empleados = admin.Mostrar_Empleados();
+            DataTable dt_sites = admin.Mostrar_Sites();
+
+            foreach(DataRow row_empleados in dt_empleados.Rows)
             {
-                Empleados = listaEmpleados,
-                Sites = listaSites
+                foreach(DataRow row_asisitencia in dt_asitencias.Rows)
+                {
+                    if (row_empleados.Field<int>("idEmpleado") == row_asisitencia.Field<int>("idEmpleado"))
+                    {
+                        if(row_asisitencia.Field<DateTime>("registro").Date != dateTime.Date)
+                        {
+                            FechaEmpleado++;
+                            dateTime = row_asisitencia.Field<DateTime>("registro");
+                        }
+                    }
+                }
+
+            }
+
+            var asistencias = new List<object>
+            {
+                new { ID = 1, Nombre = "Juan Pérez", Site = "CDMX", TipoEmpleado = "Tiempo Completo", Encargado = "José Martínez", Fecha = "2025-03-03", Entrada = "08:00", Salida = "17:00", Estado = "Presente" },
+                new { ID = 2, Nombre = "María López", Site = "Guadalajara", TipoEmpleado = "Medio Tiempo", Encargado = "Laura Gómez", Fecha = "2025-03-03", Entrada = "08:30", Salida = "17:30", Estado = "Tarde" }
             };
 
-            return View(viewModel);
+            return Json(new { data = asistencias });
         }
-        public IActionResult addEmpleados()
+        public IActionResult CerrarSesion()
         {
-            var listaSites = _contextDB.Sites.ToList();
-            return View(listaSites);
+            HttpContext.Response.Cookies.Delete("Checador_Intervalo");
+            return RedirectToAction("Index", "Home");
         }
-        [HttpPost]
-        public IActionResult addEmpleados(Empleado empleado, Usuario usuario)
-        {
-            empleado.Hash = GenerarSHA256Base64(empleado.Nombre + empleado.IdSite);
-            empleado.DireccionImagen = "h";
-            _contextDB.Empleados.Add(empleado);
-            _contextDB.SaveChanges();
-
-            if (usuario.Correo != null)
-            {
-                usuario.HashEmpleado = empleado.Hash;
-                _contextDB.Usuario.Add(usuario);
-                _contextDB.SaveChanges();
-            }
-            return RedirectToAction("Empleados");
-        }
-
-        public IActionResult editEmpleados(int Id)
-        {
-            int idEmpleado = Id;
-            var empleado = _contextDB.Empleados.FirstOrDefault(p => p.Id == Id);
-            var usuario = _contextDB.Usuario.FirstOrDefault(p => p.HashEmpleado == empleado.Hash);
-            if(usuario != null)
-            {
-                ViewBag.Correo = usuario.Correo;
-                ViewBag.Contrasena = usuario.Contrasena;
-            }
-
-            var listasites = _contextDB.Sites.ToList();
-            ViewBag.Sites = listasites;
-            ViewBag.TipoEmpleado = empleado.TipoEmpleado;   
-            return View(empleado);
-        }
-        [HttpPost]
-        public IActionResult editEmpleados(Empleado empleado, Usuario usuario)
-        {
-            var empleadoExistente = _contextDB.Empleados.FirstOrDefault(p => p.Id == empleado.Id);
-            string hash = empleadoExistente.Hash;
-            if (empleadoExistente != null)
-            {
-                empleadoExistente.Nombre = empleado.Nombre;
-                empleadoExistente.TipoEmpleado = empleado.TipoEmpleado;
-                empleadoExistente.IdSite = empleado.IdSite;
-                empleadoExistente.DireccionImagen = empleado.DireccionImagen;
-                empleadoExistente.Hash = GenerarSHA256Base64(empleado.Nombre + empleado.IdSite);
-                hash = empleadoExistente.Hash;
-                _contextDB.SaveChanges();
-            }
-            if (usuario.Correo != null)
-            {
-                var usuarioExistente = _contextDB.Usuario.FirstOrDefault(p => p.HashEmpleado == hash);
-                usuarioExistente.Correo = usuario.Correo;
-                usuarioExistente.Contrasena = usuario.Contrasena;
-                _contextDB.SaveChanges();
-            }
-
-            return View();
-        }
-
-        public IActionResult Sites()
-        {
-            var listasites = _contextDB.Sites.ToList();
-            return View(listasites);
-        }
-
-        static string GenerarSHA256Base64(string input)
-        {
-            using (SHA256 sha256 = SHA256.Create())
-            {
-                byte[] bytes = Encoding.UTF8.GetBytes(input);
-                byte[] hashBytes = sha256.ComputeHash(bytes);
-                return Convert.ToBase64String(hashBytes);
-            }
-        }
-
-
     }
 }
