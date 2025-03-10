@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Empleados</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Agregar Empleados</h1>
+
+        <!-- Formulario para agregar empleados -->
+        <form id="employeeForm" class="mb-4">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo Electrónico:</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="position" class="form-label">Puesto:</label>
+                <input type="text" class="form-control" id="position" required>
+            </div>
+            <div class="mb-3">
+                <label for="salary" class="form-label">Salario:</label>
+                <input type="number" class="form-control" id="salary" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar Empleado</button>
+        </form>
+
+        <!-- Lista de empleados -->
+        <div class="employee-list">
+            <h2 class="mb-3">Lista de Empleados</h2>
+            <ul id="employeeList" class="list-group">
+                <!-- Aquí se mostrarán los empleados agregados -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS y dependencias -->
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <!-- Script para manejar la lógica -->
+    @section scripts{
+        <script>
+            // Array para almacenar los empleados
+            let employees = [];
+
+            // Función para agregar un empleado
+            document.getElementById('employeeForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                // Obtener los valores del formulario
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const position = document.getElementById('position').value;
+                const salary = document.getElementById('salary').value;
+
+                // Crear un objeto empleado
+                const employee = {
+                    name: name,
+                    email: email,
+                    position: position,
+                    salary: salary
+                };
+
+                // Agregar el empleado al array
+                employees.push(employee);
+
+                // Limpiar el formulario
+                document.getElementById('employeeForm').reset();
+
+                // Actualizar la lista de empleados
+                updateEmployeeList();
+            });
+
+            // Función para actualizar la lista de empleados
+            function updateEmployeeList() {
+                const employeeList = document.getElementById('employeeList');
+                employeeList.innerHTML = ''; // Limpiar la lista
+
+                // Recorrer el array de empleados y agregarlos a la lista
+                employees.forEach((employee, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.className = 'list-group-item';
+                    listItem.innerHTML = `
+                        <strong>Nombre:</strong> ${employee.name}<br>
+                        <strong>Correo:</strong> ${employee.email}<br>
+                        <strong>Puesto:</strong> ${employee.position}<br>
+                        <strong>Salario:</strong> $${employee.salary}
+                    `;
+                    employeeList.appendChild(listItem);
+                });
+            }
+        </script>
+    }
+</body>
+</html>
