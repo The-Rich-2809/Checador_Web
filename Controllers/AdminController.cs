@@ -30,6 +30,15 @@ namespace Checador_Web.Controllers
             return View();
         }
         [HttpGet]
+        public IActionResult Modificar_Empleados (int Id)
+        {
+            ViewBag.ModEmpleados = admin.Mostrar_EmpleadosId(Id);
+            ViewBag.Sites = admin.Mostrar_Sites();
+            return View();
+        }
+
+
+        [HttpGet]
         public IActionResult Agregar_Empleados()
         {
             return View();

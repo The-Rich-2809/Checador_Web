@@ -13,6 +13,7 @@ namespace Checador_Web.Models
         public static string Mensaje { get; set; }
         public static int idEmpleadoAdmin { get; set; }
         public static int idEmpleadoTabla { get; set; }
+        public static string AccesoSite { get; set; }
 
         public static string NombreSite {  get; set; }
         public static int IdSite { get; set; }
@@ -27,5 +28,7 @@ namespace Checador_Web.Models
         public static string[] Usuarios = { "Empleado", "Manager", "Administrador" };
         public static string IdEmpleado { get; set; }
         public static DateTime Registro { get; set; }
+
+
     }
 }

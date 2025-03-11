@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Diagnostics;
+using System.Reflection.PortableExecutable;
 
 namespace Checador_Web.Controllers
 {
@@ -25,6 +26,9 @@ namespace Checador_Web.Controllers
             {
                 if (miCookie == row.Field<string>("Correo"))
                 {
+                    Datos.idEmpleadoTabla = row.Field<Int32>("idEmpleado");
+                    Datos.AccesoSite = row.Field<string>("AccesoSite");
+
                     return RedirectToAction("Lobby", "Admin");
                 }
             }

@@ -1,0 +1,105 @@
+﻿@{
+    Layout = "_LayoutAdmin";
+}
+@using System.Data;
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Empleado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Editar Empleado</h2>
+
+        @foreach (DataRow row_site in ViewBag.ModEmpleados.Rows)
+        {
+            <form asp-controller="Admin" asp-action="EditarEmpleado" method="post">
+                <input type="hidden" name="IdEmpleado" value="@row_site[0]" />
+
+                <div class="mb-3">
+                    <label for="Nombre" class="form-label">Nombre:</label>
+                    <input type="text" name="Nombre" class="form-control" value="@row_site[1]" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="PrimerApellido" class="form-label">Primer Apellido:</label>
+                    <input type="text" name="PrimerApellido" class="form-control" value="@row_site[2]" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="SegundoApellido" class="form-label">Segundo Apellido:</label>
+                    <input type="text" name="SegundoApellido" class="form-control" value="@row_site[3]">
+                </div>
+
+                <div class="mb-3">
+                    <label for="Site" class="form-label">Site:</label>
+                    <select id="Site" name="Site" class="form-select">
+                        @foreach (DataRow data in ViewBag.Sites.Rows)
+                        {
+                            <option value="@data[0]">@data[1]</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="TipoEmpleado" class="form-label">Tipo de Empleado:</label>
+                    <select asp-for="@row_site[6]" id="TipoEmpleado" name="TipoEmpleado" class="form-select">
+                        <option value="@Datos.Usuarios[0]">@Datos.Usuarios[0]</option>
+                        <option value="@Datos.Usuarios[1]">@Datos.Usuarios[1]</option>
+                        <option value="@Datos.Usuarios[2]">@Datos.Usuarios[2]</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Encargado" class="form-label">Encargado:</label>
+                    <select id="Encargado" name="Encargado" class="form-select">
+                        <option value="@row_site[8]" selected>@row_site[8]</option>
+                    </select>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    <a asp-controller="Admin" asp-action="Empleados" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        }
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            function toggleEncargado() {
+                var tipoEmpleado = $('#TipoEmpleado').val();
+                if (tipoEmpleado === '@Datos.Usuarios[0]' || tipoEmpleado === '@Datos.Usuarios[1]') {
+                    $('#Encargado').prop('disabled', true);
+                } else {
+                    $('#Encargado').prop('disabled', false);
+                }
+            }
+
+            $('#Site').change(function () {
+                var siteId = $(this).val();
+                $('#Encargado').empty();
+                
+                $.ajax({
+                    url: '/Admin/GetEncargados',
+                    type: 'GET',
+                    data: { siteId: siteId },
+                    success: function (data) {
+                        $.each(data, function (index, item) {
+                            $('#Encargado').append('<option value="' + item.id + '">' + item.nombre + '</option>');
+                        });
+                    }
+                });
+            });
+
+            $('#TipoEmpleado').change(toggleEncargado);
+            toggleEncargado();
+        });
+    </script>
+</body>
+</html>
