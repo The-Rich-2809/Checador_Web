@@ -31,9 +31,12 @@ namespace Checador_Web.Controllers
             ViewBag.Sites = sites;
             return View();
         }
+
         [HttpGet]
-        public IActionResult Agregar_Empleados()
+        public IActionResult EditarEmpleado(int Id)
         {
+            ViewBag.ModEmpleados = admin.GetEmpleado(Id);
+            ViewBag.Sites = admin.Mostrar_Sites();
             return View();
         }
 

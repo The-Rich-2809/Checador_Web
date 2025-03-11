@@ -24,7 +24,7 @@ namespace Checador_Web.Models
                 {
                     while (reader.Read())
                     {
-                        Datos.idEmpleadoTabla = reader.GetInt32(0);
+                        Datos.AccesoSite = reader.GetString(4);
                         Datos.idEmpleadoTabla = reader.GetInt32(1);
                     }
 

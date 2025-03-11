@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Checador_Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+37074b553b5ad8ccd58d4661d80f8924a9fc5f3c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+192bba5b912967ffbb46a6919906292d98229cb8")]
 [assembly: System.Reflection.AssemblyProductAttribute("Checador_Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Checador_Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

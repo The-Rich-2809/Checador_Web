@@ -25,6 +25,9 @@ namespace Checador_Web.Controllers
             {
                 if (miCookie == row.Field<string>("Correo"))
                 {
+                    Datos.idEmpleadoTabla = row.Field<Int32>("idEmpleado");
+                    Datos.AccesoSite = row.Field<string>("AccesoSite");
+
                     return RedirectToAction("Lobby", "Admin");
                 }
             }
