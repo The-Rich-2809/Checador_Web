@@ -19,20 +19,10 @@ namespace Checador_Web.Controllers
         public IActionResult Index()
         {
             var miCookie = HttpContext.Request.Cookies["Checador_Intervalo"];
+            if(login.ComprobarCookie(miCookie))
+                return RedirectToAction("Lobby", "Admin");
 
-            DataTable data = login.Mostrar_EmpleadosAdmin();
-            foreach (DataRow row in data.Rows)
-            {
-                if (miCookie == row.Field<string>("Correo"))
-                {
-                    Datos.idEmpleadoTabla = row.Field<Int32>("idEmpleado");
-                    Datos.AccesoSite = row.Field<string>("AccesoSite");
-
-                    return RedirectToAction("Lobby", "Admin");
-                }
-            }
-
-            return View();
+                return View();
         }
         [HttpPost]
         public IActionResult Index(string Correo, string Contrasena)

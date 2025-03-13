@@ -2,6 +2,11 @@
 using MySql.Data.MySqlClient;
 using System.Data;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using Checador_Web.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using System.Diagnostics;
+
 
 namespace Checador_Web.Models
 {
@@ -66,6 +71,22 @@ namespace Checador_Web.Models
                 conexionBD.Close();
             }
             return dt;
+        }
+
+        public bool ComprobarCookie(string miCookie)
+        {
+
+            DataTable data = Mostrar_EmpleadosAdmin();
+            foreach (DataRow row in data.Rows)
+            {
+                if (miCookie == row.Field<string>("Correo"))
+                {
+                    Datos.idEmpleadoTabla = row.Field<Int32>("idEmpleado");
+                    Datos.AccesoSite = row.Field<string>("AccesoSite");
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
