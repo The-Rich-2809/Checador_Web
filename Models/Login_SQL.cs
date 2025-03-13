@@ -47,7 +47,7 @@ namespace Checador_Web.Models
         {
             DataTable dt = new DataTable();
 
-            string sql = "SELECT * From empleadosadmin";
+            string sql = "SELECT * From empleadosAdmin";
             MySqlConnection conexionBD = Conexion.conexion();
             conexionBD.Open();
 

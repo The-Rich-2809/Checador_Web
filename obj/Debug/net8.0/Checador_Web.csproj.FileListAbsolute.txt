@@ -61,7 +61,6 @@ C:\Users\ricar\Documents\GitHub\Checador_Web\obj\Debug\net8.0\staticwebassets\ms
 C:\Users\ricar\Documents\GitHub\Checador_Web\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Checador_Web.props
 C:\Users\ricar\Documents\GitHub\Checador_Web\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Checador_Web.props
 C:\Users\ricar\Documents\GitHub\Checador_Web\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\ricar\Documents\GitHub\Checador_Web\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\ricar\Documents\GitHub\Checador_Web\obj\Debug\net8.0\Checador.329C8FBB.Up2Date
 C:\Users\ricar\Documents\GitHub\Checador_Web\obj\Debug\net8.0\Checador_Web.dll
 C:\Users\ricar\Documents\GitHub\Checador_Web\obj\Debug\net8.0\refint\Checador_Web.dll

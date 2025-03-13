@@ -4,13 +4,13 @@
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Checador_Web.uno7pqxkgs.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-ZhbnL9eYa22WXGnlCYo6\u002BMB3OnlM4sHS739ozeazgd4="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2265"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022ZhbnL9eYa22WXGnlCYo6\u002BMB3OnlM4sHS739ozeazgd4=\u0022"},{"Name":"Last-Modified","Value":"Tue, 11 Mar 2025 15:48:22 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"2265"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022ZhbnL9eYa22WXGnlCYo6\u002BMB3OnlM4sHS739ozeazgd4=\u0022"},{"Name":"Last-Modified","Value":"Wed, 12 Mar 2025 23:46:13 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Checador_Web/Checador_Web.uno7pqxkgs.bundle.scp.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Checador_Web.uno7pqxkgs.bundle.scp.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"uno7pqxkgs"},{"Name":"integrity","Value":"sha256-ZhbnL9eYa22WXGnlCYo6\u002BMB3OnlM4sHS739ozeazgd4="},{"Name":"label","Value":"_content/Checador_Web/Checador_Web.bundle.scp.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2265"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022ZhbnL9eYa22WXGnlCYo6\u002BMB3OnlM4sHS739ozeazgd4=\u0022"},{"Name":"Last-Modified","Value":"Tue, 11 Mar 2025 15:48:22 GMT"}]]]></ResponseHeaders>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"2265"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022ZhbnL9eYa22WXGnlCYo6\u002BMB3OnlM4sHS739ozeazgd4=\u0022"},{"Name":"Last-Modified","Value":"Wed, 12 Mar 2025 23:46:13 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Checador_Web/css/site.c2tiyv64ts.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>

@@ -12,8 +12,8 @@ namespace Checador_Web.Models
         public static MySqlConnection conexion()
         {
             string cadenaConexion = "";
-            cadenaConexion = "datasource=localhost; username=root; password=300920; database=checador";
-            //cadenaConexion = "datasource=db4free.net; username=dbintervalo; password=Intervalo2024; database=dbchecador";
+            //cadenaConexion = "datasource=localhost; username=root; password=300920; database=checador";
+            cadenaConexion = "Server=MYSQL1001.site4now.net; Database=db_ab6528_checado; Uid=ab6528_checado; Pwd=Intervalo2024;";
 
             try
             {
