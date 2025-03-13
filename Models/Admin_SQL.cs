@@ -63,6 +63,32 @@ namespace Checador_Web.Models
             return dt;
         }
 
+        public DataTable GetSite()
+        {
+            DataTable dataTable = new DataTable();
+
+            string sql = "SELECT * FROM sites";
+            MySqlConnection conexionBD = Conexion.conexion();
+            conexionBD.Open();
+
+            try
+            {
+                MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+                dataTable.Load(comando.ExecuteReader());
+
+            }
+            catch (MySqlException ex)
+            {
+                Datos.Mensaje = "Error al buscar " + ex.Message;
+            }
+            finally
+            {
+                conexionBD.Close();
+            }
+
+            return dataTable;
+        }
+
         public DataTable GetSite(int id)
         {
             DataTable dataTable = new DataTable();

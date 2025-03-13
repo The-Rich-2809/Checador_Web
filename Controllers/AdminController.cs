@@ -63,7 +63,7 @@ namespace Checador_Web.Controllers
             var miCookie = HttpContext.Request.Cookies["Checador_Intervalo"];
             if (login.ComprobarCookie(miCookie))
             {
-                DataTable data = admin.Mostrar_Sites();
+                DataTable data = admin.GetSite();
                 ViewBag.Sites = data;
                 return View();
             }
