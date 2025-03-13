@@ -22,7 +22,7 @@ namespace Checador_Web.Controllers
             if(login.ComprobarCookie(miCookie))
                 return RedirectToAction("Lobby", "Admin");
 
-                return View();
+            return View();
         }
         [HttpPost]
         public IActionResult Index(string Correo, string Contrasena)

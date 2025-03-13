@@ -26,6 +26,7 @@ namespace Checador_Web.Controllers
                 }
                 return View();
             }
+            CerrarSesion();
             return RedirectToAction("Index", "Home");
 
         }
@@ -41,6 +42,7 @@ namespace Checador_Web.Controllers
                 ViewBag.Sites = sites;
                 return View();
             }
+            CerrarSesion();
             return RedirectToAction("Index", "Home");
         }
 
@@ -54,6 +56,33 @@ namespace Checador_Web.Controllers
                 ViewBag.Sites = admin.Mostrar_Sites();
                 return View();
             }
+            CerrarSesion();
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpGet]
+        public IActionResult EliminarEmpleado(int Id)
+        {
+            var miCookie = HttpContext.Request.Cookies["Checador_Intervalo"];
+            if (login.ComprobarCookie(miCookie))
+            {
+                ViewBag.ModEmpleados = admin.GetEmpleado(Id);
+                Datos.IdEmpleado = Convert.ToString(Id);
+                return View();
+            }
+            CerrarSesion();
+            return RedirectToAction("Index", "Home");
+        }
+        [HttpPost]
+        public IActionResult EliminarEmpleado()
+        {
+            var miCookie = HttpContext.Request.Cookies["Checador_Intervalo"];
+            if (login.ComprobarCookie(miCookie))
+            {
+                if (admin.EliminarEmpleado(Datos.IdEmpleado))
+                    return RedirectToAction("Empleados");
+                return View();
+            }
+            CerrarSesion();
             return RedirectToAction("Index", "Home");
         }
 
@@ -63,10 +92,11 @@ namespace Checador_Web.Controllers
             var miCookie = HttpContext.Request.Cookies["Checador_Intervalo"];
             if (login.ComprobarCookie(miCookie))
             {
-                DataTable data = admin.GetSite();
+                DataTable data = admin.Mostrar_Sites();
                 ViewBag.Sites = data;
                 return View();
             }
+            CerrarSesion();
             return RedirectToAction("Index", "Home");
         }
 
@@ -78,6 +108,7 @@ namespace Checador_Web.Controllers
             {
                 return View();
             }
+            CerrarSesion();
             return RedirectToAction("Index", "Home");
         }
 
@@ -91,6 +122,7 @@ namespace Checador_Web.Controllers
                     return RedirectToAction("Sites");
                 return View();
             }
+            CerrarSesion();
             return RedirectToAction("Index", "Home");
         }
 
@@ -104,6 +136,7 @@ namespace Checador_Web.Controllers
                 ViewBag.Sites = dt;
                 return View();
             }
+            CerrarSesion();
             return RedirectToAction("Index", "Home");
         }
 
@@ -117,6 +150,7 @@ namespace Checador_Web.Controllers
                     return RedirectToAction("Sites");
                 return View();
             }
+            CerrarSesion();
             return RedirectToAction("Index", "Home");
         }
 
@@ -131,6 +165,7 @@ namespace Checador_Web.Controllers
                 Datos.IdSite = id;
                 return View();
             }
+            CerrarSesion();
             return RedirectToAction("Index", "Home");
         }
 
@@ -144,6 +179,7 @@ namespace Checador_Web.Controllers
                     return RedirectToAction("Sites");
                 return View();
             }
+            CerrarSesion();
             return RedirectToAction("Index", "Home");
         }
 
@@ -158,6 +194,7 @@ namespace Checador_Web.Controllers
                 ViewBag.Sites = admin.Mostrar_Sites();
                 return View();
             }
+            CerrarSesion();
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]

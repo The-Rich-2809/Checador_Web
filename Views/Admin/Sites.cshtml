@@ -2,6 +2,7 @@
     Layout = "_LayoutAdmin";
 }
 @using System.Data;
+@using Checador_Web.Models;
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -35,7 +36,12 @@
                     <th>Nombre</th>
                     <th>Direccion</th>
                     <th>Correo</th>
-                    <th> <a class="btn btn-success btn-sm" asp-controller="Admin" asp-action="CrearSite">Agregar</a></th>
+                    <th> 
+                        @if (Datos.AccesoSite == "0")
+                        {
+                            <a class="btn btn-success btn-sm" asp-controller="Admin" asp-action="CrearSite">Agregar</a>
+                        }
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +54,10 @@
                         <td>@row_site[3].ToString()</td>
                         <td>
                             <a class="btn btn-warning btn-sm" asp-controller="Admin" asp-action="EditarSite" asp-route-id="@row_site[0]">Modificar</a>
-                            <a class="btn btn-danger btn-sm" asp-controller="Admin" asp-action="EliminarSite" asp-route-id="@row_site[0]" onclick="return confirm('¿Estás seguro de eliminar este site?');">Eliminar</a>
+                            @if (Datos.AccesoSite == "0")
+                            {
+                                <a class="btn btn-danger btn-sm" asp-controller="Admin" asp-action="EliminarSite" asp-route-id="@row_site[0]">Eliminar</a>
+                            }
                         </td>
                     </tr>
                 }

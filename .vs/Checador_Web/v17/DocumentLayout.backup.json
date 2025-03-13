@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|c:\\users\\ricar\\documents\\github\\checador_web\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|c:\\users\\ricar\\documents\\github\\checador_web\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|c:\\users\\ricar\\documents\\github\\checador_web\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|c:\\users\\ricar\\documents\\github\\checador_web\\models\\login_sql.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,16 +23,20 @@
       "RelativeMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|solutionrelative:models\\conexion.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|c:\\users\\ricar\\documents\\github\\checador_web\\views\\admin\\editarempleado.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|solutionrelative:views\\admin\\editarempleado.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|c:\\users\\ricar\\documents\\github\\checador_web\\models\\datos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|solutionrelative:models\\datos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|c:\\users\\ricar\\documents\\github\\checador_web\\views\\admin\\empleados.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|solutionrelative:views\\admin\\empleados.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|c:\\users\\ricar\\documents\\github\\checador_web\\views\\admin\\sites.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|solutionrelative:views\\admin\\sites.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|c:\\users\\ricar\\documents\\github\\checador_web\\views\\admin\\editarsite.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{821CA6C4-411B-4BEB-B7A3-547F1CC0A75C}|Checador_Web.csproj|solutionrelative:views\\admin\\editarsite.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,19 +46,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Datos.cs",
-              "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Models\\Datos.cs",
-              "RelativeDocumentMoniker": "Models\\Datos.cs",
-              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Models\\Datos.cs",
-              "RelativeToolTip": "Models\\Datos.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA1AAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T16:53:14.112Z",
+              "WhenOpened": "2025-03-13T07:54:37.488Z",
               "EditorCaption": ""
             },
             {
@@ -65,35 +69,10 @@
               "RelativeDocumentMoniker": "Models\\Login_SQL.cs",
               "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Models\\Login_SQL.cs",
               "RelativeToolTip": "Models\\Login_SQL.cs",
-              "ViewState": "AgIAAEIAAAAAAAAAAAAYwFcAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T16:52:55.357Z",
+              "WhenOpened": "2025-03-13T07:54:26.851Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Empleados.cshtml",
-              "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Views\\Admin\\Empleados.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\Empleados.cshtml",
-              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Views\\Admin\\Empleados.cshtml",
-              "RelativeToolTip": "Views\\Admin\\Empleados.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAAD8AAABfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-11T16:51:13.688Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "EditarEmpleado.cshtml",
-              "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Views\\Admin\\EditarEmpleado.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\EditarEmpleado.cshtml",
-              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Views\\Admin\\EditarEmpleado.cshtml",
-              "RelativeToolTip": "Views\\Admin\\EditarEmpleado.cshtml",
-              "ViewState": "AgIAABoAAAAAAAAAAAAkwCQAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-03-11T16:48:37.887Z"
             },
             {
               "$type": "Document",
@@ -101,37 +80,37 @@
               "Title": "Admin_SQL.cs",
               "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Models\\Admin_SQL.cs",
               "RelativeDocumentMoniker": "Models\\Admin_SQL.cs",
-              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Models\\Admin_SQL.cs",
-              "RelativeToolTip": "Models\\Admin_SQL.cs",
-              "ViewState": "AgIAALAAAAAAAAAAAAAswMMAAABQAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Models\\Admin_SQL.cs*",
+              "RelativeToolTip": "Models\\Admin_SQL.cs*",
+              "ViewState": "AgIAAMUAAAAAAAAAAAAUwOAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T16:45:35.82Z",
+              "WhenOpened": "2025-03-13T07:49:37.708Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AdminController.cs",
-              "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Controllers\\AdminController.cs",
-              "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
-              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Controllers\\AdminController.cs*",
-              "RelativeToolTip": "Controllers\\AdminController.cs*",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAUwCsAAAA1AAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "Datos.cs",
+              "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Models\\Datos.cs",
+              "RelativeDocumentMoniker": "Models\\Datos.cs",
+              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Models\\Datos.cs",
+              "RelativeToolTip": "Models\\Datos.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T16:43:34.982Z",
+              "WhenOpened": "2025-03-13T07:47:50.888Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Controllers\\AdminController.cs*",
+              "RelativeToolTip": "Controllers\\AdminController.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA7AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T16:58:18.267Z",
+              "WhenOpened": "2025-03-13T06:56:55.715Z",
               "EditorCaption": ""
             },
             {
@@ -142,9 +121,48 @@
               "RelativeDocumentMoniker": "Models\\Conexion.cs",
               "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Models\\Conexion.cs",
               "RelativeToolTip": "Models\\Conexion.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAABPAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-11T15:48:55.782Z",
+              "WhenOpened": "2025-03-13T06:59:30.001Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Sites.cshtml",
+              "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Views\\Admin\\Sites.cshtml",
+              "RelativeDocumentMoniker": "Views\\Admin\\Sites.cshtml",
+              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Views\\Admin\\Sites.cshtml",
+              "RelativeToolTip": "Views\\Admin\\Sites.cshtml",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAADoAAACNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T06:56:40.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "EditarSite.cshtml",
+              "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Views\\Admin\\EditarSite.cshtml",
+              "RelativeDocumentMoniker": "Views\\Admin\\EditarSite.cshtml",
+              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Views\\Admin\\EditarSite.cshtml",
+              "RelativeToolTip": "Views\\Admin\\EditarSite.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T06:56:31.741Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Empleados.cshtml",
+              "DocumentMoniker": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Views\\Admin\\Empleados.cshtml",
+              "RelativeDocumentMoniker": "Views\\Admin\\Empleados.cshtml",
+              "ToolTip": "C:\\Users\\ricar\\Documents\\GitHub\\Checador_Web\\Views\\Admin\\Empleados.cshtml*",
+              "RelativeToolTip": "Views\\Admin\\Empleados.cshtml*",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAAEAAAABgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-03-13T06:56:03.677Z",
               "EditorCaption": ""
             }
           ]

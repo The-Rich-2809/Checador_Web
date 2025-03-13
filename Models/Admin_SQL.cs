@@ -63,6 +63,64 @@ namespace Checador_Web.Models
             return dt;
         }
 
+        public bool EliminarEmpleado(string id)
+        {
+            string sql = "DELETE FROM empleados WHERE idEmpleado = @idEmpleado";
+            MySqlConnection conexionBD = Conexion.conexion();
+            conexionBD.Open();
+            try
+            {
+                MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+                comando.Parameters.AddWithValue("idEmpleado", id);
+                comando.ExecuteNonQuery();
+                conexionBD.Close();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                conexionBD.Close();
+                return false;
+            }
+        }
+
+        public bool EliminarEmpleadoSite(string id)
+        {
+            string sql = "DELETE FROM empleadosite WHERE idEmpleado = @idEmpleado";
+            MySqlConnection conexionBD = Conexion.conexion();
+            conexionBD.Open();
+            try
+            {
+                MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+                comando.Parameters.AddWithValue("idEmpleado", id);
+                comando.ExecuteNonQuery();
+                conexionBD.Close();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                conexionBD.Close();
+                return false;
+            }
+        }
+        public bool EliminarEmpleadoAdmin(string id)
+        {
+            string sql = "DELETE FROM empleadosadmin WHERE idEmpleado = @idEmpleado";
+            MySqlConnection conexionBD = Conexion.conexion();
+            conexionBD.Open();
+            try
+            {
+                MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+                comando.Parameters.AddWithValue("idEmpleado", id);
+                comando.ExecuteNonQuery();
+                conexionBD.Close();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                conexionBD.Close();
+                return false;
+            }
+        }
         public DataTable GetSite()
         {
             DataTable dataTable = new DataTable();

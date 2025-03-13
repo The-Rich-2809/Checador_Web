@@ -62,7 +62,7 @@
                         <td>@row_empleado[8].ToString()</td>
                         <td>
                             <a class="btn btn-warning btn-sm" href="@Url.Action("EditarEmpleado", "Admin", new { Id = row_empleado[0] })">Modificar</a>
-                            <a class="btn btn-danger btn-sm" asp-controller="Admin" asp-action="DeleteEmpleado" asp-route-id="@row_empleado[0]" onclick="return confirm('¿Estás seguro de eliminar este empleado?');">Eliminar</a>
+                            <a class="btn btn-danger btn-sm" href="@Url.Action("EliminarEmpleado", "Admin", new { Id = row_empleado[0] })">Eliminar</a>
                         </td>
                     </tr>
                 }
