@@ -45,7 +45,6 @@
             <div class="col-md-12 text-end mt-2">
                 <button id="resetFilters" class="btn btn-secondary">Restablecer Filtros</button>
             </div>
-
         </div>
 
         <!-- Tabla -->
@@ -57,7 +56,9 @@
                     <th>Site</th>
                     <th>Encargado</th>
                     <th>Fecha</th>
+                    <th>Site de Entrada</th>
                     <th>Hora de Entrada</th>
+                    <th>Site de Salida</th>
                     <th>Hora de Salida</th>
                     <th>Estado</th>
                 </tr>
@@ -66,45 +67,85 @@
                 @if (ViewBag.Asistencias is DataTable)
                 {
                     var asistencias = (ViewBag.Asistencias as DataTable)?.Rows.Cast<DataRow>()
-                        .GroupBy(a => new { EmpleadoID = a[1].ToString(), Fecha = Convert.ToDateTime(a[4]).Date })
-                        .Select(grupo => new
-                        {
-                            EmpleadoID = grupo.Key.EmpleadoID,
-                            Fecha = grupo.Key.Fecha,
-                            Entrada = grupo.Min(a => Convert.ToDateTime(a[4])), // La primera hora de entrada
-                            Salida = grupo.Max(a => Convert.ToDateTime(a[4]))  // La última hora de salida
-                        });
+                    .GroupBy(a => new { EmpleadoID = a[1].ToString(), Fecha = Convert.ToDateTime(a[4]).Date, SiteID = a[2].ToString() })
+                    .Select(grupo => new
+                    {
+                        EmpleadoID = grupo.Key.EmpleadoID,
+                        Fecha = grupo.Key.Fecha,
+                        Entrada = grupo.Min(a => Convert.ToDateTime(a[4])), // Hora de entrada más temprana
+                        Salida = grupo.Max(a => Convert.ToDateTime(a[4])),  // Hora de salida más tardía
+                        SiteID = grupo.Key.SiteID
+                    });
 
                     var empleados = (ViewBag.Empleados as DataTable)?.Rows.Cast<DataRow>();
                     var sitios = (ViewBag.Sites as DataTable)?.Rows.Cast<DataRow>();
-                    var encargados = (ViewBag.Empleados as DataTable)?.Rows.Cast<DataRow>();
 
                     foreach (var asistencia in asistencias)
                     {
                         var empleado = empleados?.FirstOrDefault(e => e[0].ToString() == asistencia.EmpleadoID);
-                        var sitio = sitios?.FirstOrDefault(s => s[0].ToString() == empleado?[5].ToString());
-                        var encargado = encargados?.FirstOrDefault(enc => enc[0].ToString() == empleado?[7].ToString());
-                        var entrada = TimeSpan.Parse(sitio[5].ToString());
+                        var sitio = sitios?.FirstOrDefault(s => s[0].ToString() == asistencia.SiteID);
 
-                        <tr>
+                        var encargado = empleados?.FirstOrDefault(enc => enc[0].ToString() == empleado?[7].ToString());
+
+                        TimeSpan entradaHorario = TimeSpan.Parse(sitio[5].ToString());
+                        TimeSpan salidaHorario = TimeSpan.Parse(sitio[6].ToString());
+                        TimeSpan tolerancia = TimeSpan.FromMinutes(10);
+                        TimeSpan cincoMinAntes = TimeSpan.FromMinutes(5);
+
+                        TimeSpan entradaReal = asistencia.Entrada.TimeOfDay;
+                        TimeSpan salidaReal = asistencia.Salida.TimeOfDay;
+
+                        string estado = "";
+                        string colorClase = "";
+
+                        if (entradaReal <= entradaHorario)
+                        {
+                            estado = "Entrada correcta";
+                        }
+                        else if (entradaReal > entradaHorario + tolerancia)
+                        {
+                            estado = "Retardo";
+                        }
+
+                        if (salidaReal < salidaHorario - cincoMinAntes)
+                        {
+                            estado += " y salida temprana";
+                        }
+                        else
+                        {
+                            estado += " y salida correcta";
+                        }
+
+                        if (estado.Contains("Entrada correcta y salida temprana"))
+                        {
+                            colorClase = "table-warning"; // Amarillo
+                        }
+                        else if (estado.Contains("Retardo"))
+                        {
+                            colorClase = "table-danger"; // Rojo
+                        }
+
+                        <tr class="@colorClase">
                             <td>@asistencia.EmpleadoID</td>
                             <td>@(empleado != null ? $"{empleado[1]} {empleado[2]} {empleado[3]}" : "Desconocido")</td>
                             <td>@(sitio != null ? sitio[1].ToString() : "N/A")</td>
                             <td>@(encargado != null ? encargado[1].ToString() : "N/A")</td>
                             <td>@asistencia.Fecha.ToString("yyyy-MM-dd")</td>
+                            <td>@(sitio != null ? sitio[1].ToString() : "N/A")</td>
                             <td>@asistencia.Entrada.ToString("HH:mm")</td>
+                            <td>@(sitio != null ? sitio[1].ToString() : "N/A")</td>
                             <td>@asistencia.Salida.ToString("HH:mm")</td>
-                            <td>@(TimeSpan.Parse(asistencia.Entrada.Hour.ToString()) > entrada ? "Retardo" : "Entro normal")</td>
+                            <td>@estado</td>
                         </tr>
                     }
                 }
             </tbody>
         </table>
 
-
+        <!-- Botón de exportar -->
         <form asp-controller="Admin" asp-action="ExportarExcel" method="post">
             <div class="col-md-12 text-end mt-2">
-                <button type="submit" asp-controller="Admin" asp-action="ExportarExcel" class="btn btn-success">Exportar a Excel</button>
+                <button type="submit" class="btn btn-success">Exportar a Excel</button>
             </div>
         </form>
     </div>
@@ -123,50 +164,28 @@
                     "paging": false
                 });
 
-                // Filtrar por Site
-                $('#filterSite').on('change', function () {
-                    var site = $(this).val();
-                    table.columns(2).search(site).draw();
+                $('#filterSite, #filterEncargado').on('change', function () {
+                    table.columns($(this).parent().index()).search(this.value).draw();
                 });
 
-                // Filtrar por Encargado
-                $('#filterEncargado').on('change', function () {
-                    var encargado = $(this).val();
-                    table.columns(3).search(encargado).draw();
-                });
-
-                // Filtrar por rango de fechas
                 $('#startDate, #endDate').on('change', function () {
                     table.draw();
                 });
 
-                // Extender DataTables para filtrar por rango de fechas
-                $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-                    var min = $('#startDate').val();
-                    var max = $('#endDate').val();
-                    var date = data[4]; // Columna de la fecha (índice 4)
+                $.fn.dataTable.ext.search.push(function (settings, data) {
+                    var min = new Date($('#startDate').val());
+                    var max = new Date($('#endDate').val());
+                    var fecha = new Date(data[4]);
 
-                    if (min && new Date(date) < new Date(min)) {
-                        return false;
-                    }
-                    if (max && new Date(date) > new Date(max)) {
-                        return false;
-                    }
-                    return true;
+                    return (isNaN(min) || fecha >= min) && (isNaN(max) || fecha <= max);
                 });
 
-                // ✅ Botón para restablecer filtros
-                $('#resetFilters').on('click', function () {
-                    $('#filterSite').val('');
-                    $('#filterEncargado').val('');
-                    $('#startDate').val('');
-                    $('#endDate').val('');
-
-                    table.columns().search('').draw(); // Limpia todos los filtros en la tabla
+                $('#resetFilters').click(function () {
+                    $('select, input').val('');
+                    table.search('').columns().search('').draw();
                 });
             });
         </script>
     }
-
 </body>
 </html>
