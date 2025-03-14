@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using OfficeOpenXml;
+using Org.BouncyCastle.Asn1.X509;
 
 namespace Checador_Web.Controllers
 {
@@ -113,12 +114,12 @@ namespace Checador_Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CrearSite(string Nombre, string Direccion, string Correo, string Contrasena)
+        public IActionResult CrearSite(string Nombre, string Direccion, string Correo, string Contrasena, string entrada, string salida)
         {
             var miCookie = HttpContext.Request.Cookies["Checador_Intervalo"];
             if (login.ComprobarCookie(miCookie))
             {
-                if (admin.CrearSite(Nombre, Direccion, Correo, Contrasena))
+                if (admin.CrearSite(Nombre, Direccion, Correo, Contrasena, TimeSpan.Parse(entrada), TimeSpan.Parse(salida)))
                     return RedirectToAction("Sites");
                 return View();
             }
@@ -141,12 +142,12 @@ namespace Checador_Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditarSite(int IdSite, string Nombre, string Direccion, string Correo)
+        public IActionResult EditarSite(int IdSite, string Nombre, string Direccion, string Correo, string Contrasena, string entrada, string salida)
         {
             var miCookie = HttpContext.Request.Cookies["Checador_Intervalo"];
             if (login.ComprobarCookie(miCookie))
             {
-                if (admin.EditSite(IdSite, Nombre, Direccion, Correo))
+                if (admin.EditSite(IdSite, Nombre, Direccion, Correo, Contrasena, TimeSpan.Parse(entrada), TimeSpan.Parse(salida)))
                     return RedirectToAction("Sites");
                 return View();
             }

@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Asn1.Cms;
 using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Checador_Web.Models
 {
@@ -24,14 +25,12 @@ namespace Checador_Web.Models
                 MySqlCommand comando = new MySqlCommand(sql, conexionBD);
                 comando.Parameters.AddWithValue("AccesoSite", Datos.AccesoSite);
                 dt.Load(comando.ExecuteReader());
+                conexionBD.Close();
 
             }
             catch (MySqlException ex)
             {
                 Datos.Mensaje ="Error al buscar " + ex.Message;
-            }
-            finally
-            {
                 conexionBD.Close();
             }
             return dt;
@@ -50,14 +49,12 @@ namespace Checador_Web.Models
                 MySqlCommand comando = new MySqlCommand(sql, conexionBD);
                 comando.Parameters.AddWithValue("idEmpleado", id);
                 dt.Load(comando.ExecuteReader());
+                conexionBD.Close();
 
             }
             catch (MySqlException ex)
             {
                 Datos.Mensaje = "Error al buscar " + ex.Message;
-            }
-            finally
-            {
                 conexionBD.Close();
             }
             return dt;
@@ -133,14 +130,12 @@ namespace Checador_Web.Models
             {
                 MySqlCommand comando = new MySqlCommand(sql, conexionBD);
                 dataTable.Load(comando.ExecuteReader());
+                conexionBD.Close();
 
             }
             catch (MySqlException ex)
             {
                 Datos.Mensaje = "Error al buscar " + ex.Message;
-            }
-            finally
-            {
                 conexionBD.Close();
             }
 
@@ -160,23 +155,21 @@ namespace Checador_Web.Models
                 MySqlCommand comando = new MySqlCommand(sql, conexionBD);
                 comando.Parameters.AddWithValue("idsite", id);
                 dataTable.Load(comando.ExecuteReader());
+                conexionBD.Close();
 
             }
             catch (MySqlException ex)
             {
                 Datos.Mensaje = "Error al buscar " + ex.Message;
-            }
-            finally
-            {
                 conexionBD.Close();
             }
 
             return dataTable;
         }
 
-        public bool CrearSite(string nombre, string Direccion, string Correo, string Contrasena)
+        public bool CrearSite(string nombre, string Direccion, string Correo, string Contrasena, TimeSpan entrada, TimeSpan salida)
         {
-            string sql = "INSERT INTO sites (Nombre, Direccion, Correo, Contrasena) VALUES (@Nombre, @Direccion, @Correo, @Contrasena);";
+            string sql = "INSERT INTO sites (Nombre, Direccion, Correo, Contrasena, HoraEntrada, HoraSalida) VALUES (@Nombre, @Direccion, @Correo, @Contrasena, @entrada, @salida);";
             MySqlConnection conexionBD = Conexion.conexion();
             conexionBD.Open();
 
@@ -187,6 +180,8 @@ namespace Checador_Web.Models
                 comando.Parameters.AddWithValue("@Direccion", Direccion);
                 comando.Parameters.AddWithValue("@Correo", Correo);
                 comando.Parameters.AddWithValue("@Contrasena", Contrasena);
+                comando.Parameters.AddWithValue("@entrada", entrada);
+                comando.Parameters.AddWithValue("@salida", salida);
                 comando.ExecuteNonQuery();
                 conexionBD.Close();
                 return true;
@@ -199,9 +194,9 @@ namespace Checador_Web.Models
         }
 
 
-        public bool EditSite(int IdSite, string Nombre, string Direccion, string Correo)
+        public bool EditSite(int IdSite, string Nombre, string Direccion, string Correo, string Contrasena, TimeSpan entrada, TimeSpan salida)
         {
-            string sql = "UPDATE sites SET Nombre = @Nombre, Direccion = @Direccion, Correo =@Correo WHERE idsite = @IdSite;";
+            string sql = "UPDATE sites SET Nombre = @Nombre, Direccion = @Direccion, Correo =@Correo, Contrasena = @Contrasena, HoraEntrada = @entrada, HoraSalida = @salida WHERE idsite = @IdSite;";
             MySqlConnection conexionBD = Conexion.conexion();
             conexionBD.Open();
             try
@@ -211,6 +206,36 @@ namespace Checador_Web.Models
                 comando.Parameters.AddWithValue("Direccion", Direccion);
                 comando.Parameters.AddWithValue("Correo", Correo);
                 comando.Parameters.AddWithValue("IdSite", IdSite);
+                comando.Parameters.AddWithValue("@entrada", entrada);
+                comando.Parameters.AddWithValue("@salida", salida);
+                comando.Parameters.AddWithValue("@Contrasena", Contrasena);
+                comando.ExecuteNonQuery();
+                conexionBD.Close();
+
+                if (EditarEmpleadoHora(IdSite, entrada, salida))
+                    return true;
+                return false;
+            }
+            catch (MySqlException ex)
+            {
+                conexionBD.Close();
+                return false;
+
+            }
+        }
+
+        public bool EditarEmpleadoHora (int IdSite, TimeSpan entrada, TimeSpan salida)
+        {
+            string sql = "UPDATE empleados SET  HoraEntrada = @entrada, HoraSalida = @salida WHERE idsite = @IdSite;";
+            MySqlConnection conexionBD = Conexion.conexion();
+            conexionBD.Open();
+
+            try
+            {
+                MySqlCommand comando = new MySqlCommand(sql, conexionBD);
+                comando.Parameters.AddWithValue("IdSite", IdSite);
+                comando.Parameters.AddWithValue("@entrada", entrada);
+                comando.Parameters.AddWithValue("@salida", salida);
                 comando.ExecuteNonQuery();
                 conexionBD.Close();
                 return true;
@@ -279,14 +304,12 @@ namespace Checador_Web.Models
                 MySqlCommand comando = new MySqlCommand(sql, conexionBD);
                 comando.Parameters.AddWithValue("AccesoSite", Datos.AccesoSite);
                 dt.Load(comando.ExecuteReader());
+                conexionBD.Close();
 
             }
             catch (MySqlException ex)
             {
                 Datos.Mensaje ="Error al buscar " + ex.Message;
-            }
-            finally
-            {
                 conexionBD.Close();
             }
 
@@ -310,14 +333,12 @@ namespace Checador_Web.Models
                 MySqlCommand comando = new MySqlCommand(sql, conexionBD);
                 comando.Parameters.AddWithValue("AccesoSite", Datos.AccesoSite);
                 dt.Load(comando.ExecuteReader());
+                conexionBD.Close();
 
             }
             catch (MySqlException ex)
             {
                 Datos.Mensaje = "Error al buscar " + ex.Message;
-            }
-            finally
-            {
                 conexionBD.Close();
             }
             return dt;
@@ -339,14 +360,12 @@ namespace Checador_Web.Models
                 MySqlCommand comando = new MySqlCommand(sql, conexionBD);
                 comando.Parameters.AddWithValue("AccesoSite", Datos.AccesoSite);
                 dt.Load(comando.ExecuteReader());
+                conexionBD.Close();
 
             }
             catch (MySqlException ex)
             {
                 Datos.Mensaje = "Error al buscar " + ex.Message;
-            }
-            finally
-            {
                 conexionBD.Close();
             }
             return dt;

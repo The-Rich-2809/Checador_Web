@@ -59,6 +59,7 @@
                     <th>Fecha</th>
                     <th>Hora de Entrada</th>
                     <th>Hora de Salida</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody>
@@ -83,6 +84,7 @@
                         var empleado = empleados?.FirstOrDefault(e => e[0].ToString() == asistencia.EmpleadoID);
                         var sitio = sitios?.FirstOrDefault(s => s[0].ToString() == empleado?[5].ToString());
                         var encargado = encargados?.FirstOrDefault(enc => enc[0].ToString() == empleado?[7].ToString());
+                        var entrada = TimeSpan.Parse(sitio[5].ToString());
 
                         <tr>
                             <td>@asistencia.EmpleadoID</td>
@@ -92,6 +94,7 @@
                             <td>@asistencia.Fecha.ToString("yyyy-MM-dd")</td>
                             <td>@asistencia.Entrada.ToString("HH:mm")</td>
                             <td>@asistencia.Salida.ToString("HH:mm")</td>
+                            <td>@(asistencia.Salida.TimeOfDay > entrada ? "Retardo" : "Entro normal")</td>
                         </tr>
                     }
                 }

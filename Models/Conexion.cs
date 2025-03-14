@@ -13,7 +13,7 @@ namespace Checador_Web.Models
         {
             string cadenaConexion = "";
             //cadenaConexion = "datasource=localhost; username=root; password=300920; database=checador";
-            cadenaConexion = "Server=MYSQL1001.site4now.net; Database=db_ab6528_checado; Uid=ab6528_checado; Pwd=Intervalo2024;";
+            cadenaConexion = "Server=MYSQL1001.site4now.net; Database=db_ab6528_checado; Uid=ab6528_checado; Pwd=TheRich2809;";
 
             try
             {
