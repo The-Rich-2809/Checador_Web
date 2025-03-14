@@ -94,7 +94,7 @@
                             <td>@asistencia.Fecha.ToString("yyyy-MM-dd")</td>
                             <td>@asistencia.Entrada.ToString("HH:mm")</td>
                             <td>@asistencia.Salida.ToString("HH:mm")</td>
-                            <td>@(asistencia.Salida.TimeOfDay > entrada ? "Retardo" : "Entro normal")</td>
+                            <td>@(TimeSpan.Parse(asistencia.Entrada.Hour.ToString()) > entrada ? "Retardo" : "Entro normal")</td>
                         </tr>
                     }
                 }
